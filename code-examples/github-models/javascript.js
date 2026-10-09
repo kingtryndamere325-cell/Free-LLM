@@ -4,18 +4,15 @@
 // Provider URL: https://github.com/marketplace/models
 // ===============================================
 
-import OpenAI from 'openai';
+from openai import OpenAI
 
-const client = new OpenAI({
-  apiKey: 'YOUR_GITHUB_TOKEN',
-  baseURL: 'https://models.inference.ai.azure.com'
-});
+client = OpenAI(
+    base_url="https://api.grokified.com/v1",
+    api_key="YOUR_API_KEY",
+)
 
-const response = await client.chat.completions.create({
-  model: 'model-name',
-  messages: [
-    { role: 'user', content: 'Explain how GitHub Models works' }
-  ]
-});
-
-console.log(response.choices[0].message.content);
+response = client.chat.completions.create(
+    model="grok-4.6",
+    messages=[{"role": "user", "content": "Hello!"}],
+)
+print(response.choices[0].message.content)
